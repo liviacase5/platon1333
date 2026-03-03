@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description"
+        content="Choose your DexxiGirl membership plan. Monthly and annual options with full access to 100+ exclusive HD videos." />
+    <title>Membership Plans – DexxiGirl</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar scrolled" id="navbar">
+        <a href="index.html" class="logo"><span class="dexi">Dex</span><span class="girl">xiGirl</span><span
+                class="logo-dot">.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#videos">Videos</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="membership.html" class="active">Membership</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="login.html" class="btn btn-outline" style="padding:9px 20px;font-size:0.9rem;">Sign In</a>
+            <a href="login.html" class="btn btn-primary" style="padding:9px 20px;font-size:0.9rem;">Join Now</a>
+        </div>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <section
+        style="padding:120px 5% 60px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(229,0,58,0.15),transparent 60%);">
+        <div class="hero-badge" style="display:inline-flex;margin-bottom:20px;">
+            <span class="dot"></span> 🔒 Secure & Discreet Billing
+        </div>
+        <h1
+            style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;margin-bottom:16px;">
+            Choose Your <em style="color:var(--accent-red);font-style:italic;">Plan</em></h1>
+        <p style="color:var(--text-secondary);font-size:1.05rem;max-width:540px;margin:0 auto 16px;line-height:1.8;">
+            Unlock full access to 100+ exclusive HD videos. No ads, no interruptions. Cancel anytime.</p>
+        <!-- Toggle -->
+        <div
+            style="display:inline-flex;background:var(--bg-elevated);border:1px solid var(--border);border-radius:100px;padding:4px;margin-bottom:60px;">
+            <button class="btn" id="toggleMonthly" onclick="setBilling('monthly')"
+                style="border-radius:100px;padding:9px 24px;font-size:0.9rem;background:var(--accent-red);color:#fff;">Monthly</button>
+            <button class="btn" id="toggleAnnual" onclick="setBilling('annual')"
+                style="border-radius:100px;padding:9px 24px;font-size:0.9rem;color:var(--text-secondary);">Annual <span
+                    style="background:var(--accent-gold);color:#000;font-size:0.7rem;padding:2px 8px;border-radius:100px;font-weight:700;margin-left:6px;">SAVE
+                    40%</span></button>
+        </div>
+
+        <!-- Plans -->
+        <div class="plans-grid">
+            <!-- Basic -->
+            <div class="plan-card">
+                <div class="plan-name">Basic</div>
+                <div class="plan-price" id="basicPrice"><sup>$</sup>9<sub>.99/mo</sub></div>
+                <p class="plan-desc">Perfect for starters. Access selected content.</p>
+                <ul class="plan-features">
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> 30+ Videos Unlocked</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> HD Quality (720p)</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> 1 Device Simultaneous</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> Ad-Free Streaming</li>
+                    <li class="plan-feature"><svg class="cross" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg> 4K Ultra HD</li>
+                    <li class="plan-feature"><svg class="cross" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg> Early Access Releases</li>
+                    <li class="plan-feature"><svg class="cross" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg> Download for Offline</li>
+                </ul>
+                <a href="login.html" class="btn btn-outline" style="width:100%;justify-content:center;">Get Basic</a>
+            </div>
+
+            <!-- Premium (Popular) -->
+            <div class="plan-card popular">
+                <div class="popular-badge">⭐ Most Popular</div>
+                <div class="plan-name">Premium</div>
+                <div class="plan-price" id="premiumPrice"><sup>$</sup>19<sub>.99/mo</sub></div>
+                <p class="plan-desc">Best value. Full access to all content in HD.</p>
+                <ul class="plan-features">
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> All 100+ Videos</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> 4K Ultra HD Quality</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> 2 Devices Simultaneous</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> Ad-Free Streaming</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> Early Access Releases</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> Members-Only Chat</li>
+                    <li class="plan-feature"><svg class="cross" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg> Download for Offline</li>
+                </ul>
+                <a href="login.html" class="btn btn-primary" style="width:100%;justify-content:center;">Get Premium</a>
+            </div>
+
+            <!-- VIP -->
+            <div class="plan-card">
+                <div class="plan-name">VIP Gold</div>
+                <div class="plan-price" id="vipPrice"><sup>$</sup>34<sub>.99/mo</sub></div>
+                <p class="plan-desc">The ultimate experience. Everything unlocked.</p>
+                <ul class="plan-features">
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> All 100+ Videos</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> 4K Ultra HD Quality</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> Unlimited Devices</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> Ad-Free Streaming</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> Early Access Releases</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> Download for Offline</li>
+                    <li class="plan-feature"><svg class="check" width="16" height="16" fill="none" stroke="currentColor"
+                            stroke-width="2.5" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg> 👑 VIP Priority Support</li>
+                </ul>
+                <a href="login.html" class="btn btn-gold" style="width:100%;justify-content:center;">Get VIP Gold</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAYMENT METHODS -->
+    <section class="section fade-in-up" style="text-align:center;padding:60px 5%;">
+        <h2 class="section-title" style="justify-content:center;margin-bottom:24px;">Secure Payment Methods</h2>
+        <p style="color:var(--text-secondary);max-width:500px;margin:0 auto 36px;font-size:0.95rem;line-height:1.8;">All
+            transactions are encrypted and processed by trusted adult payment gateways. Billing appears discreetly on
+            your statement.</p>
+        <div style="display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;">
+            <div
+                style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px 36px;">
+                <div style="font-size:1.4rem;font-weight:800;color:var(--text-primary);">CCBill</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">Industry Standard</div>
+            </div>
+            <div
+                style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px 36px;">
+                <div style="font-size:1.4rem;font-weight:800;color:var(--text-primary);">Epoch</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">Trusted Since 1996</div>
+            </div>
+            <div
+                style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px 36px;">
+                <div style="font-size:1.4rem;font-weight:800;color:var(--text-primary);">💳 VISA / MC</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">Card Payments</div>
+            </div>
+            <div
+                style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px 36px;">
+                <div style="font-size:1.4rem;font-weight:800;color:var(--text-primary);">₿ Crypto</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">Bitcoin / USDT</div>
+            </div>
+        </div>
+        <div style="display:flex;justify-content:center;align-items:center;gap:24px;margin-top:36px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:var(--text-muted);">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+                256-bit SSL Encryption
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:var(--text-muted);">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Discreet Billing Statement
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:var(--text-muted);">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Cancel Anytime
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:var(--text-muted);">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+                No Hidden Fees
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section fade-in-up" style="padding:60px 5% 80px;max-width:760px;margin:0 auto;">
+        <h2 class="section-title" style="justify-content:center;margin-bottom:40px;">Frequently Asked Questions</h2>
+        <div style="display:flex;flex-direction:column;gap:2px;">
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">How does the membership work?</div>
+                <div class="faq-a">Simply choose your plan and complete payment. Your account is activated instantly and
+                    you get full access based on your plan tier.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">Is my payment discreet?</div>
+                <div class="faq-a">Yes. All transactions appear on your bank statement as a generic merchant name, not
+                    "DexxiGirl". We use CCBill and Epoch which are industry-standard adult billing systems known for
+                    full discretion.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">Can I cancel at any time?</div>
+                <div class="faq-a">Absolutely. You can cancel your subscription at any time from your account settings.
+                    There are no cancellation fees and you retain access until the end of your billing period.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">What video quality is available?</div>
+                <div class="faq-a">Basic members get HD (720p), while Premium and VIP members enjoy up to 4K Ultra HD
+                    quality with smooth adaptive streaming.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">How many videos will be available?</div>
+                <div class="faq-a">We currently have 100+ exclusive videos with more being added weekly. You'll never
+                    run out of fresh content.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo"><span class="dexi">Dex</span><span class="girl">xiGirl</span><span
+                        class="logo-dot">.</span></div>
+                <p>Premium exclusive adult content platform. Smooth streaming, 4K quality, and total privacy.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#videos">Videos</a></li>
+                    <li><a href="membership.html">Membership</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Account</h4>
+                <ul>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="login.html">Register</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">18 U.S.C. 2257</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 DexxiGirl. All rights reserved. | 18+ Adults Only</p>
+            <div class="payment-icons">
+                <span class="payment-icon">CCBill</span>
+                <span class="payment-icon">Epoch</span>
+                <span class="payment-icon">VISA</span>
+                <span class="payment-icon">MC</span>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            margin-bottom: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color var(--transition);
+        }
+
+        .faq-item:hover,
+        .faq-item.open {
+            border-color: var(--border-accent);
+        }
+
+        .faq-q {
+            padding: 20px 24px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-q::after {
+            content: '+';
+            color: var(--accent-red);
+            font-size: 1.4rem;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.open .faq-q::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-a {
+            padding: 0 24px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+
+        .faq-item.open .faq-a {
+            max-height: 200px;
+            padding-bottom: 20px;
+        }
+    </style>
+
+    <script src="assets/main.js"></script>
+    <script>
+        function setBilling(type) {
+            const monthly = { basic: '9<sub>.99/mo</sub>', premium: '19<sub>.99/mo</sub>', vip: '34<sub>.99/mo</sub>' };
+            const annual = { basic: '5<sub>.99/mo</sub>', premium: '11<sub>.99/mo</sub>', vip: '20<sub>.99/mo</sub>' };
+            const prices = type === 'annual' ? annual : monthly;
+            document.getElementById('basicPrice').innerHTML = '<sup>$</sup>' + prices.basic;
+            document.getElementById('premiumPrice').innerHTML = '<sup>$</sup>' + prices.premium;
+            document.getElementById('vipPrice').innerHTML = '<sup>$</sup>' + prices.vip;
+            const mBtn = document.getElementById('toggleMonthly');
+            const aBtn = document.getElementById('toggleAnnual');
+            if (type === 'annual') {
+                aBtn.style.cssText = 'border-radius:100px;padding:9px 24px;font-size:0.9rem;background:var(--accent-red);color:#fff;';
+                mBtn.style.cssText = 'border-radius:100px;padding:9px 24px;font-size:0.9rem;color:var(--text-secondary);';
+            } else {
+                mBtn.style.cssText = 'border-radius:100px;padding:9px 24px;font-size:0.9rem;background:var(--accent-red);color:#fff;';
+                aBtn.style.cssText = 'border-radius:100px;padding:9px 24px;font-size:0.9rem;color:var(--text-secondary);';
+            }
+        }
+        function toggleFaq(el) { el.classList.toggle('open'); }
+    </script>
+</body>
+
+</html>
