@@ -10,7 +10,7 @@ function showToast(msg, duration = 3000) {
 }
 
 // ===================== NAVBAR SCROLL =====================
-(function() {
+(function () {
   const nav = document.getElementById('navbar');
   if (!nav) return;
   window.addEventListener('scroll', () => {
@@ -26,42 +26,101 @@ function enterSite() {
   gate.classList.add('hidden');
   setTimeout(() => gate.style.display = 'none', 600);
 }
-
-(function() {
+(function () {
   const gate = document.getElementById('ageGate');
   if (!gate) return;
-  if (sessionStorage.getItem('ageVerified')) {
-    gate.style.display = 'none';
+  if (sessionStorage.getItem('ageVerified')) gate.style.display = 'none';
+})();
+
+// ===================== HERO SLIDESHOW =====================
+(function () {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.slider-dot');
+  if (!slides.length) return;
+
+  let current = 0;
+  let autoTimer;
+
+  function goToSlide(idx) {
+    slides[current].classList.remove('active');
+    dots[current] && dots[current].classList.remove('active');
+    current = (idx + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current] && dots[current].classList.add('active');
+    // Update now-playing text dynamically
+    const titles = ['Golden Hour – Studio Sessions', 'City Lights – Night Edition', 'Candlelight – Luxury Edition'];
+    const badge = document.getElementById('nowPlayingBadge');
+    if (badge && titles[current]) {
+      badge.childNodes[badge.childNodes.length - 1].textContent = ' NOW PLAYING';
+    }
+  }
+
+  function startAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goToSlide(current + 1), 5000);
+  }
+
+  window.goToSlide = goToSlide;
+  window.changeSlide = function (dir) {
+    goToSlide(current + dir);
+    startAuto(); // reset timer on manual nav
+  };
+
+  startAuto();
+})();
+
+// ===================== SEARCH =====================
+function syncSearch(val) {
+  // Sync navbar search if it exists
+  const navInput = document.getElementById('searchInput');
+  if (navInput && navInput.value !== val) navInput.value = val;
+  filterByQuery(val);
+}
+
+function doSearch() {
+  const input = document.getElementById('heroSearch') || document.getElementById('searchInput');
+  if (input) filterByQuery(input.value);
+}
+
+function quickSearch(term) {
+  const heroInput = document.getElementById('heroSearch');
+  const navInput = document.getElementById('searchInput');
+  if (heroInput) heroInput.value = term;
+  if (navInput) navInput.value = term;
+  filterByQuery(term);
+  // Scroll to videos
+  const vid = document.getElementById('videos');
+  if (vid) vid.scrollIntoView({ behavior: 'smooth' });
+}
+
+function filterByQuery(q) {
+  const query = (q || '').toLowerCase().trim();
+  document.querySelectorAll('.video-card').forEach(card => {
+    if (!query) {
+      card.style.display = '';
+      return;
+    }
+    const title = card.querySelector('.card-title');
+    card.style.display = (title && title.textContent.toLowerCase().includes(query)) ? '' : 'none';
+  });
+}
+
+(function () {
+  const navInput = document.getElementById('searchInput');
+  if (navInput) {
+    navInput.addEventListener('input', function () {
+      const heroInput = document.getElementById('heroSearch');
+      if (heroInput) heroInput.value = this.value;
+      filterByQuery(this.value);
+    });
   }
 })();
 
-// ===================== OPEN VIDEO / UPGRADE =====================
-function openVideo(id) {
-  window.location.href = 'watch.html';
-}
-
-function promptUpgrade() {
-  showToast('🔒 Members only! Join to unlock this video.');
-  setTimeout(() => {
-    // Subtle shake on the join btn
-    const btn = document.getElementById('hero-join-btn');
-    if (btn) {
-      btn.style.transform = 'translateX(-4px)';
-      setTimeout(() => btn.style.transform = 'translateX(4px)', 100);
-      setTimeout(() => btn.style.transform = '', 200);
-    }
-  }, 300);
-}
-
 // ===================== CATEGORY FILTER =====================
 function filterCategory(el, cat) {
-  // Update active chip
   document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
-
-  // Filter cards
-  const cards = document.querySelectorAll('.video-card[data-cat]');
-  cards.forEach(card => {
+  document.querySelectorAll('.video-card[data-cat]').forEach(card => {
     if (cat === 'all' || card.dataset.cat === cat) {
       card.style.display = '';
       card.style.animation = 'fadeIn 0.3s ease';
@@ -71,35 +130,19 @@ function filterCategory(el, cat) {
   });
 }
 
-// ===================== SEARCH =====================
-(function() {
-  const input = document.getElementById('searchInput');
-  if (!input) return;
-  input.addEventListener('input', function() {
-    const q = this.value.toLowerCase().trim();
-    if (!q) {
-      document.querySelectorAll('.video-card').forEach(c => c.style.display = '');
-      return;
-    }
-    document.querySelectorAll('.video-card').forEach(card => {
-      const title = card.querySelector('.card-title');
-      if (title && title.textContent.toLowerCase().includes(q)) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  });
-})();
+// ===================== VIDEO ACTIONS =====================
+function openVideo(id) {
+  window.location.href = 'watch.html';
+}
+function promptUpgrade() {
+  showToast('🔒 Members only! Join to unlock this video.');
+}
 
 // ===================== SCROLL ANIMATIONS =====================
-(function() {
-  const observer = new IntersectionObserver((entries) => {
+(function () {
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
@@ -109,42 +152,17 @@ function filterCategory(el, cat) {
 function toggleMobileMenu() {
   const links = document.querySelector('.nav-links');
   if (!links) return;
-  if (links.style.display === 'flex') {
-    links.style.display = '';
-    links.style.flexDirection = '';
-    links.style.background = '';
-    links.style.position = '';
-    links.style.top = '';
-    links.style.left = '';
-    links.style.right = '';
-    links.style.padding = '';
-    links.style.borderBottom = '';
+  const isOpen = links.dataset.open === '1';
+  if (isOpen) {
+    links.removeAttribute('style');
+    links.dataset.open = '0';
   } else {
-    links.style.display = 'flex';
-    links.style.flexDirection = 'column';
-    links.style.background = 'var(--bg-secondary)';
-    links.style.position = 'fixed';
-    links.style.top = '70px';
-    links.style.left = '0';
-    links.style.right = '0';
-    links.style.padding = '20px 5%';
-    links.style.borderBottom = '1px solid var(--border)';
-    links.style.gap = '16px';
+    Object.assign(links.style, {
+      display: 'flex', flexDirection: 'column',
+      background: 'var(--bg-secondary)', position: 'fixed',
+      top: '70px', left: '0', right: '0',
+      padding: '20px 5%', borderBottom: '1px solid var(--border)', gap: '16px', zIndex: '999'
+    });
+    links.dataset.open = '1';
   }
 }
-
-// ===================== FEATURE BOX HOVER =====================
-(function() {
-  document.querySelectorAll('.feature-box').forEach(box => {
-    box.addEventListener('mouseenter', () => {
-      box.style.borderColor = 'var(--border-accent)';
-      box.style.transform = 'translateY(-4px)';
-      box.style.boxShadow = 'var(--shadow-glow)';
-    });
-    box.addEventListener('mouseleave', () => {
-      box.style.borderColor = '';
-      box.style.transform = '';
-      box.style.boxShadow = '';
-    });
-  });
-})();
