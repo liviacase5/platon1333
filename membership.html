@@ -14,8 +14,8 @@
 
     <!-- NAVBAR -->
     <nav class="navbar scrolled" id="navbar">
-        <a href="index.html" class="logo"><span class="dexi">Dex</span><span class="girl">xiGirl</span><span
-                class="logo-dot">.</span></a>
+        <a href="index.html" class="logo"><span class="logo-de">DE</span><span class="logo-xx">XX</span><span
+                class="logo-igirl">IGIRL</span></a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="index.html#videos">Videos</a></li>
@@ -30,20 +30,20 @@
 
     <!-- PAGE HERO -->
     <section
-        style="padding:120px 5% 60px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(229,0,58,0.15),transparent 60%);">
+        style="padding:120px 5% 60px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(201,162,39,0.12),transparent 60%);">
         <div class="hero-badge" style="display:inline-flex;margin-bottom:20px;">
             <span class="dot"></span> 🔒 Secure & Discreet Billing
         </div>
         <h1
             style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;margin-bottom:16px;">
-            Choose Your <em style="color:var(--accent-red);font-style:italic;">Plan</em></h1>
+            Choose Your <em style="color:var(--accent-gold-light);font-style:italic;">Plan</em></h1>
         <p style="color:var(--text-secondary);font-size:1.05rem;max-width:540px;margin:0 auto 16px;line-height:1.8;">
             Unlock full access to 100+ exclusive HD videos. No ads, no interruptions. Cancel anytime.</p>
         <!-- Toggle -->
         <div
             style="display:inline-flex;background:var(--bg-elevated);border:1px solid var(--border);border-radius:100px;padding:4px;margin-bottom:60px;">
             <button class="btn" id="toggleMonthly" onclick="setBilling('monthly')"
-                style="border-radius:100px;padding:9px 24px;font-size:0.9rem;background:var(--accent-red);color:#fff;">Monthly</button>
+                style="border-radius:100px;padding:9px 24px;font-size:0.9rem;background:linear-gradient(135deg,var(--accent-gold-light),var(--accent-gold));color:#080808;font-weight:700;">Monthly</button>
             <button class="btn" id="toggleAnnual" onclick="setBilling('annual')"
                 style="border-radius:100px;padding:9px 24px;font-size:0.9rem;color:var(--text-secondary);">Annual <span
                     style="background:var(--accent-gold);color:#000;font-size:0.7rem;padding:2px 8px;border-radius:100px;font-weight:700;margin-left:6px;">SAVE
@@ -266,8 +266,8 @@
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
-                <div class="logo"><span class="dexi">Dex</span><span class="girl">xiGirl</span><span
-                        class="logo-dot">.</span></div>
+                <div class="logo"><span class="logo-de">DE</span><span class="logo-xx">XX</span><span
+                        class="logo-igirl">IGIRL</span></div>
                 <p>Premium exclusive adult content platform. Smooth streaming, 4K quality, and total privacy.</p>
             </div>
             <div class="footer-col">
@@ -332,7 +332,7 @@
 
         .faq-q::after {
             content: '+';
-            color: var(--accent-red);
+            color: var(--accent-gold-light);
             font-size: 1.4rem;
             font-weight: 300;
             transition: transform 0.3s ease;
@@ -370,10 +370,10 @@
             const mBtn = document.getElementById('toggleMonthly');
             const aBtn = document.getElementById('toggleAnnual');
             if (type === 'annual') {
-                aBtn.style.cssText = 'border-radius:100px;padding:9px 24px;font-size:0.9rem;background:var(--accent-red);color:#fff;';
+                aBtn.style.cssText = 'border-radius:100px;padding:9px 24px;font-size:0.9rem;background:linear-gradient(135deg,var(--accent-gold-light),var(--accent-gold));color:#080808;font-weight:700;';
                 mBtn.style.cssText = 'border-radius:100px;padding:9px 24px;font-size:0.9rem;color:var(--text-secondary);';
             } else {
-                mBtn.style.cssText = 'border-radius:100px;padding:9px 24px;font-size:0.9rem;background:var(--accent-red);color:#fff;';
+                mBtn.style.cssText = 'border-radius:100px;padding:9px 24px;font-size:0.9rem;background:linear-gradient(135deg,var(--accent-gold-light),var(--accent-gold));color:#080808;font-weight:700;';
                 aBtn.style.cssText = 'border-radius:100px;padding:9px 24px;font-size:0.9rem;color:var(--text-secondary);';
             }
         }
