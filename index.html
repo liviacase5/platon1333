@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="description"
+    content="DexxiGirl – Premium adult video streaming. 100+ exclusive 4K HD videos with smooth streaming and discreet billing." />
+  <title>DexxiGirl – Premium Exclusive Content</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>" />
+</head>
+
+<body>
+
+  <!-- ========== AGE GATE ========== -->
+  <div class="age-gate-overlay" id="ageGate">
+    <div class="age-gate-box" style="padding:0; overflow:hidden;">
+      <div style="width:100%; height:180px; background:url('assets/images/73A2B820-CAC5-4400-B110-3E7BB420D090.png') center top / cover no-repeat; border-bottom:1px solid var(--border-accent);"></div>
+      <div style="padding:40px 48px;">
+      <p>This website contains explicit adult content. By entering you confirm you are <strong>18 years of age or
+          older</strong> and agree to our Terms of Service.</p>
+      <div class="age-gate-btn-group">
+        <button class="btn btn-primary" onclick="enterSite()">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622C17.176 19.29 21 14.591 21 9c0-1.09-.153-2.148-.435-3.148z" />
+          </svg>
+          I am 18+ – Enter
+        </button>
+        <a href="https://www.google.com" class="btn btn-outline">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          Exit
+        </a>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="logo">
+      <span class="logo-dex">DEX</span><span class="logo-xi">XI</span> <span class="logo-girl">GIRL</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="#">Videos</a></li>
+      <li><a href="#">Categories</a></li>
+      <li><a href="#">New Releases</a></li>
+      <li><a href="membership.html">Membership</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="nav-search">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input type="text" placeholder="Search videos…" id="searchInput" />
+      </div>
+      <a href="login.html" class="btn btn-outline" style="padding:9px 20px;font-size:0.9rem;">Sign In</a>
+      <a href="membership.html" class="btn btn-primary" style="padding:9px 20px;font-size:0.9rem;">Join Now</a>
+      <div class="hamburger" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SLIDESHOW ========== -->
+  <section class="hero-slideshow" id="home">
+
+    <!-- NOW PLAYING badge -->
+    <div class="now-playing-badge" id="nowPlayingBadge">
+      <div class="np-ring"></div>
+      NOW PLAYING
+    </div>
+
+    <!-- SLIDE 1 -->
+    <div class="slide active" id="slide-0">
+      <div class="slide-bg" style="background-image:url('assets/images/C3248E61-33A9-42FE-A424-27B1942783BF.png');"></div>
+      <div class="slide-gradient"></div>
+      <div class="slide-content">
+        <div class="slide-label"><span class="dot"></span>✨ New Release</div>
+        <h2 class="slide-title">Golden Hour<br />Studio Sessions</h2>
+        <p class="slide-subtitle">Exclusive premium content – 4K Ultra HD · 42 min</p>
+        <div class="slide-actions">
+          <a href="watch.html" class="btn btn-primary">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Watch Preview
+          </a>
+          <a href="membership.html" class="btn btn-outline"
+            style="color:#fff;border-color:rgba(255,255,255,0.3);">Unlock Full</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide" id="slide-1">
+      <div class="slide-bg" style="background-image:url('assets/images/slide2.png');"></div>
+      <div class="slide-gradient"></div>
+      <div class="slide-content">
+        <div class="slide-label"><span class="dot"></span>🔥 Most Watched</div>
+        <h2 class="slide-title">City Lights<br />Night Edition</h2>
+        <p class="slide-subtitle">Our most-streamed series – 4K Ultra HD · 31 min</p>
+        <div class="slide-actions">
+          <a href="watch.html" class="btn btn-primary">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Watch Preview
+          </a>
+          <a href="membership.html" class="btn btn-outline"
+            style="color:#fff;border-color:rgba(255,255,255,0.3);">Unlock Full</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide" id="slide-2">
+      <div class="slide-bg" style="background-image:url('assets/images/slide3.png');"></div>
+      <div class="slide-gradient"></div>
+      <div class="slide-content">
+        <div class="slide-label"><span class="dot"></span>👑 VIP Exclusive</div>
+        <h2 class="slide-title">Candlelight<br />Luxury Edition</h2>
+        <p class="slide-subtitle">VIP member exclusive – 4K Ultra HD · 58 min</p>
+        <div class="slide-actions">
+          <a href="membership.html" class="btn btn-primary">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Unlock VIP
+          </a>
+          <a href="index.html#videos" class="btn btn-outline"
+            style="color:#fff;border-color:rgba(255,255,255,0.3);">Browse More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrows -->
+    <button class="slider-prev" onclick="changeSlide(-1)">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+    </button>
+    <button class="slider-next" onclick="changeSlide(1)">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </button>
+
+    <!-- Dots -->
+    <div class="slider-dots">
+      <div class="slider-dot active" onclick="goToSlide(0)"></div>
+      <div class="slider-dot" onclick="goToSlide(1)"></div>
+      <div class="slider-dot" onclick="goToSlide(2)"></div>
+    </div>
+  </section>
+
+  <!-- ========== SEARCH BAR (directly under hero) ========== -->
+  <div class="search-hero-section" id="searchSection">
+    <div class="search-hero-inner">
+      <div class="search-hero-label">Search Our Library</div>
+      <div class="search-bar-large">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input type="text" placeholder="Search videos, categories, series…" id="heroSearch"
+          oninput="syncSearch(this.value)" />
+        <button onclick="doSearch()">Search</button>
+      </div>
+      <div class="search-tags">
+        <span class="search-tag" onclick="quickSearch('Night Sessions')">🌙 Night Sessions</span>
+        <span class="search-tag" onclick="quickSearch('Solo')">💋 Solo</span>
+        <span class="search-tag" onclick="quickSearch('Glamour')">🌟 Glamour</span>
+        <span class="search-tag" onclick="quickSearch('Luxury')">👑 Luxury</span>
+        <span class="search-tag" onclick="quickSearch('Candlelight')">🕯️ Candlelight</span>
+        <span class="search-tag" onclick="quickSearch('City Lights')">🌆 City Lights</span>
+        <span class="search-tag" onclick="quickSearch('New')">✨ New</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========== CATEGORIES ========== -->
+  <section class="section" id="featured">
+    <div class="section-header">
+      <h2 class="section-title">Browse Categories</h2>
+    </div>
+    <div class="categories-scroll">
+      <div class="category-chip active" onclick="filterCategory(this,'all')">All Videos</div>
+      <div class="category-chip" onclick="filterCategory(this,'new')">✨ New Releases</div>
+      <div class="category-chip" onclick="filterCategory(this,'popular')">🔥 Most Popular</div>
+      <div class="category-chip" onclick="filterCategory(this,'solo')">💋 Solo</div>
+      <div class="category-chip" onclick="filterCategory(this,'couple')">❤️ Couples</div>
+      <div class="category-chip" onclick="filterCategory(this,'glamour')">🌟 Glamour</div>
+      <div class="category-chip" onclick="filterCategory(this,'night')">🌙 Night Sessions</div>
+      <div class="category-chip" onclick="filterCategory(this,'luxury')">👑 Luxury</div>
+      <div class="category-chip" onclick="filterCategory(this,'bts')">🎬 Behind The Scenes</div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURED VIDEOS ========== -->
+  <section class="section" style="padding-top:0;" id="videos">
+    <div class="section-header">
+      <h2 class="section-title">Featured Videos</h2>
+      <a href="#" class="view-all">View All →</a>
+    </div>
+    <div class="video-grid" id="videoGrid">
+
+      <div class="video-card" data-cat="popular" onclick="openVideo(1)">
+        <div class="thumb-container">
+          <img src="assets/images/thumb7.png" alt="City Lights – Night Edition" loading="lazy" />
+          <div class="thumb-overlay">
+            <div class="play-btn-large"><svg width="22" height="22" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg></div>
+          </div>
+          <div class="thumb-badges"><span class="badge badge-free">Free Preview</span><span
+              class="badge badge-hd">4K</span></div>
+          <div class="card-duration">18:24</div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">City Lights – Night Edition Vol. 1</div>
+          <div class="card-meta">
+            <span class="card-views" style="display:flex;align-items:center;gap:4px;"><svg width="13" height="13"
+                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg> 124K views</span>
+            <span class="card-rating">★★★★★</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card" data-cat="glamour" onclick="promptUpgrade()">
+        <div class="thumb-container">
+          <img src="assets/images/thumb5.png" alt="Glamour Night" loading="lazy" />
+          <div class="thumb-overlay">
+            <div class="play-btn-large"><svg width="22" height="22" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg></div>
+          </div>
+          <div class="thumb-badges"><span class="badge badge-lock">🔒 Members Only</span></div>
+          <div class="card-duration">31:47</div>
+          <div class="locked-overlay"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg><span>Members Only</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Unveiling Elegance – Studio Series</div>
+          <div class="card-meta"><span>98K views</span><span class="card-rating">★★★★★</span></div>
+        </div>
+      </div>
+
+      <div class="video-card" data-cat="new" onclick="promptUpgrade()">
+        <div class="thumb-container">
+          <img src="assets/images/thumb4.png" alt="Red Stage" loading="lazy" />
+          <div class="thumb-overlay">
+            <div class="play-btn-large"><svg width="22" height="22" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg></div>
+          </div>
+          <div class="thumb-badges"><span class="badge badge-new">New</span><span class="badge badge-hd">HD</span></div>
+          <div class="card-duration">24:15</div>
+          <div class="locked-overlay"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg><span>Members Only</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Red Stage – Dramatic Performance</div>
+          <div class="card-meta"><span>56K views</span><span class="card-rating">★★★★☆</span></div>
+        </div>
+      </div>
+
+      <div class="video-card" data-cat="luxury" onclick="promptUpgrade()">
+        <div class="thumb-container">
+          <img src="assets/images/thumb6.png" alt="Luxury Suite" loading="lazy" />
+          <div class="thumb-overlay">
+            <div class="play-btn-large"><svg width="22" height="22" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg></div>
+          </div>
+          <div class="thumb-badges"><span class="badge badge-lock">🔒 Members Only</span><span
+              class="badge badge-hd">4K</span></div>
+          <div class="card-duration">42:08</div>
+          <div class="locked-overlay"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg><span>Members Only</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Luxury Morning – Penthouse Collection</div>
+          <div class="card-meta"><span>78K views</span><span class="card-rating">★★★★★</span></div>
+        </div>
+      </div>
+
+      <div class="video-card" data-cat="solo" onclick="promptUpgrade()">
+        <div class="thumb-container">
+          <img src="assets/images/thumb1.png" alt="Candlelight Session" loading="lazy" />
+          <div class="thumb-overlay">
+            <div class="play-btn-large"><svg width="22" height="22" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg></div>
+          </div>
+          <div class="thumb-badges"><span class="badge badge-lock">🔒 Members Only</span></div>
+          <div class="card-duration">28:33</div>
+          <div class="locked-overlay"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg><span>Members Only</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Candlelight Session – Intimate Winter</div>
+          <div class="card-meta"><span>89K views</span><span class="card-rating">★★★★★</span></div>
+        </div>
+      </div>
+
+      <div class="video-card" data-cat="night" onclick="promptUpgrade()">
+        <div class="thumb-container">
+          <img src="assets/images/thumb8.png" alt="Evening Elegance" loading="lazy" />
+          <div class="thumb-overlay">
+            <div class="play-btn-large"><svg width="22" height="22" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg></div>
+          </div>
+          <div class="thumb-badges"><span class="badge badge-new">New</span><span class="badge badge-hd">4K</span></div>
+          <div class="card-duration">35:50</div>
+          <div class="locked-overlay"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg><span>Members Only</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Evening Elegance – Rooftop Dusk Series</div>
+          <div class="card-meta"><span>41K views</span><span class="card-rating">★★★★☆</span></div>
+        </div>
+      </div>
+
+      <div class="video-card" data-cat="popular" onclick="promptUpgrade()">
+        <div class="thumb-container">
+          <img src="assets/images/C3248E61-33A9-42FE-A424-27B1942783BF.png" alt="Golden Hour" loading="lazy" style="object-position:center top;" />
+          <div class="thumb-overlay">
+            <div class="play-btn-large"><svg width="22" height="22" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg></div>
+          </div>
+          <div class="thumb-badges"><span class="badge badge-lock">🔒 Members Only</span><span
+              class="badge badge-hd">4K</span></div>
+          <div class="card-duration">42:30</div>
+          <div class="locked-overlay"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg><span>Members Only</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Golden Hour – Studio Sessions Vol. 1</div>
+          <div class="card-meta"><span>203K views</span><span class="card-rating">★★★★★</span></div>
+        </div>
+      </div>
+
+      <div class="video-card" data-cat="couple" onclick="promptUpgrade()">
+        <div class="thumb-container">
+          <img src="assets/images/slide3.png" alt="Luxury Candlelight" loading="lazy" />
+          <div class="thumb-overlay">
+            <div class="play-btn-large"><svg width="22" height="22" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg></div>
+          </div>
+          <div class="thumb-badges"><span class="badge badge-new">New</span><span class="badge badge-lock">👑 VIP</span>
+          </div>
+          <div class="card-duration">58:04</div>
+          <div class="locked-overlay"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg><span>VIP Only</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Candlelight Luxury – Extended Edition</div>
+          <div class="card-meta"><span>67K views</span><span class="card-rating">★★★★★</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========== PLATFORM INFO (moved to bottom for scroll discovery) ========== -->
+  <section class="description-section" style="margin-top:0;">
+    <div class="description-inner">
+      <div class="desc-left">
+        <h2>The World's Most <em>Exclusive</em> Content Platform</h2>
+        <p>DexxiGirl is a premium members-only video streaming platform featuring 100+ expertly crafted exclusive videos in 4K Ultra HD. With discreet billing via CCBill and Epoch, your privacy is always protected. Stream on any device – no buffering, no interruptions.</p>
+        <div class="desc-stat-row">
+          <div class="desc-stat"><div class="desc-stat-val">100<span style="color:var(--accent-gold)">+</span></div><div class="desc-stat-lbl">Videos</div></div>
+          <div class="desc-stat"><div class="desc-stat-val">4K HD</div><div class="desc-stat-lbl">Quality</div></div>
+          <div class="desc-stat"><div class="desc-stat-val">24/7</div><div class="desc-stat-lbl">Streaming</div></div>
+          <div class="desc-stat"><div class="desc-stat-val">100%</div><div class="desc-stat-lbl">Private</div></div>
+        </div>
+      </div>
+      <div class="desc-right">
+        <div class="desc-feature-box"><div class="icon">📺</div><h4>4K Ultra HD</h4><p>Crystal clear streaming on any device. No buffering, no quality drops.</p></div>
+        <div class="desc-feature-box"><div class="icon">🔒</div><h4>100% Private</h4><p>Discreet billing. Your data is encrypted and never shared with anyone.</p></div>
+        <div class="desc-feature-box"><div class="icon">💳</div><h4>CCBill &amp; Epoch</h4><p>Industry-leading adult payment gateways. Secure and discreet transactions.</p></div>
+        <div class="desc-feature-box"><div class="icon">🎬</div><h4>Weekly Uploads</h4><p>Fresh exclusive content added every week, just for members.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== JOIN CTA ========== -->
+  <section class="section fade-in-up" style="padding:60px 5%;">
+    <div style="max-width:700px;margin:0 auto;text-align:center;">
+      <div style="background:linear-gradient(135deg,var(--bg-card),var(--bg-elevated));border:1px solid var(--border-accent);border-radius:var(--radius-lg);padding:56px 44px;position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,162,39,0.12),transparent 70%);pointer-events:none;"></div>
+        <div style="text-align:center;margin-bottom:20px;"><img src="assets/images/1C4F20FC-8848-4442-AA99-162E4B3BBF7E%202.png" alt="DEXXI GIRL" style="max-height:55px;display:inline-block;"/></div>
+        <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:14px;position:relative;">Start Your Membership Today</h2>
+        <p style="color:var(--text-secondary);margin-bottom:32px;font-size:1rem;line-height:1.8;position:relative;">Unlock 100+ exclusive HD videos with instant access.<br/>Discreet billing. Cancel anytime.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;">
+          <a href="membership.html" class="btn btn-primary" style="font-size:1.05rem;padding:14px 32px;">⭐ Get Full Access – From $9.99</a>
+          <a href="login.html" class="btn btn-outline" style="font-size:1.05rem;padding:14px 32px;">Already a Member?</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-dex">DEX</span><span class="logo-xi">XI</span> <span class="logo-girl">GIRL</span></div>
+        <p>Premium exclusive adult content platform. Smooth 4K streaming, 100+ videos, and total privacy. Domain:
+          <strong style="color:var(--text-secondary);">dexxigirl.com</strong></p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">All Videos</a></li>
+          <li><a href="#">New Releases</a></li>
+          <li><a href="#">Categories</a></li>
+          <li><a href="membership.html">Membership</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Account</h4>
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="login.html">Register</a></li>
+          <li><a href="membership.html">Upgrade Plan</a></li>
+          <li><a href="#">My Favourites</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">DMCA</a></li>
+          <li><a href="#">18 U.S.C. 2257</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>
+        <p>© 2025 DexxiGirl. All rights reserved. | <a href="#" style="color:var(--accent-gold);">18+ Adults Only</a>
+        </p>
+        <p style="margin-top:6px;font-size:0.78rem;">All performers on this site are 18 years of age or older. In
+          compliance with 18 U.S.C. 2257.</p>
+      </div>
+      <div class="payment-icons">
+        <span style="font-size:0.75rem;color:var(--text-muted);margin-right:8px;">Secure:</span>
+        <span class="payment-icon">CCBill</span>
+        <span class="payment-icon">Epoch</span>
+        <span class="payment-icon">VISA</span>
+        <span class="payment-icon">MC</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span id="toastMsg">Members only – Join to watch!</span>
+  </div>
+
+  <script src="assets/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Admin Dashboard – DEXXIGIRL</title>
+  <link rel="stylesheet" href="assets/style.css"/>
+  <style>
+    /* ── ADMIN LAYOUT ── */
+    body{overflow-x:hidden;}
+    .admin-wrap{display:flex;min-height:100vh;padding-top:0;}
+
+    /* Sidebar */
+    .sidebar{
+      width:240px;flex-shrink:0;
+      background:var(--bg-secondary);
+      border-right:1px solid var(--border);
+      display:flex;flex-direction:column;
+      position:fixed;top:0;left:0;bottom:0;
+      z-index:200;transition:.3s ease;
+      overflow-y:auto;
+    }
+    .sidebar-logo{
+      padding:22px 20px;
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;gap:10px;
+      flex-shrink:0;
+    }
+    .sidebar-logo span{font-size:0.75rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;}
+    .sidebar-nav{padding:16px 0;flex:1;}
+    .nav-group-label{
+      font-size:0.68rem;font-weight:700;text-transform:uppercase;
+      letter-spacing:1.5px;color:var(--text-muted);
+      padding:12px 20px 6px;
+    }
+    .nav-item{
+      display:flex;align-items:center;gap:12px;
+      padding:11px 20px;
+      font-size:0.9rem;font-weight:500;color:var(--text-secondary);
+      cursor:pointer;transition:.2s ease;
+      border-left:3px solid transparent;
+      text-decoration:none;
+    }
+    .nav-item:hover{color:var(--text-primary);background:rgba(255,255,255,0.04);}
+    .nav-item.active{
+      color:var(--accent-gold-light);
+      border-left-color:var(--accent-gold);
+      background:rgba(201,162,39,0.07);
+    }
+    .nav-item svg{flex-shrink:0;opacity:0.7;}
+    .nav-item.active svg{opacity:1;}
+    .nav-badge{
+      margin-left:auto;
+      background:var(--accent-gold);color:#080808;
+      font-size:0.65rem;font-weight:800;
+      padding:2px 7px;border-radius:100px;
+    }
+
+    /* Main content */
+    .admin-main{
+      margin-left:240px;flex:1;
+      min-height:100vh;
+      background:var(--bg-primary);
+    }
+
+    /* Top bar */
+    .admin-topbar{
+      height:64px;
+      background:var(--bg-secondary);
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 28px;
+      position:sticky;top:0;z-index:100;
+    }
+    .topbar-title{font-size:1.1rem;font-weight:700;}
+    .topbar-right{display:flex;align-items:center;gap:14px;}
+    .admin-avatar{
+      width:36px;height:36px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent-gold-light),var(--accent-gold));
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;font-size:0.85rem;color:#080808;cursor:pointer;
+    }
+
+    /* Content area */
+    .admin-content{padding:28px;}
+
+    /* Stat cards */
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:28px;}
+    .stat-card{
+      background:var(--bg-card);border:1px solid var(--border);
+      border-radius:var(--radius-md);padding:22px;
+      display:flex;align-items:center;gap:16px;
+      transition:var(--transition);
+    }
+    .stat-card:hover{border-color:var(--border-accent);transform:translateY(-2px);}
+    .stat-icon{
+      width:48px;height:48px;border-radius:var(--radius-sm);
+      background:rgba(201,162,39,0.12);border:1px solid var(--border-accent);
+      display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;
+    }
+    .stat-info .val{font-size:1.7rem;font-weight:800;color:var(--accent-gold-light);}
+    .stat-info .lbl{font-size:0.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+    .stat-info .chg{font-size:0.78rem;color:#4ade80;margin-top:2px;}
+
+    /* Section header */
+    .section-hd{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:18px;flex-wrap:wrap;gap:10px;
+    }
+    .section-hd h2{font-size:1.1rem;font-weight:700;display:flex;align-items:center;gap:10px;}
+    .section-hd h2::before{content:'';width:3px;height:1.1em;background:linear-gradient(to bottom,var(--accent-gold-light),var(--accent-gold));border-radius:2px;}
+
+    /* Table */
+    .admin-table-wrap{
+      background:var(--bg-card);border:1px solid var(--border);
+      border-radius:var(--radius-md);overflow:hidden;margin-bottom:28px;
+    }
+    .admin-table{width:100%;border-collapse:collapse;font-size:0.88rem;}
+    .admin-table th{
+      background:var(--bg-elevated);
+      padding:12px 16px;text-align:left;
+      font-size:0.73rem;font-weight:700;text-transform:uppercase;
+      letter-spacing:1px;color:var(--text-muted);
+      border-bottom:1px solid var(--border);
+    }
+    .admin-table td{
+      padding:14px 16px;
+      border-bottom:1px solid var(--border);
+      color:var(--text-secondary);
+      vertical-align:middle;
+    }
+    .admin-table tr:last-child td{border-bottom:none;}
+    .admin-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .tbl-thumb{
+      width:60px;height:38px;border-radius:6px;
+      object-fit:cover;
+    }
+    .tbl-title{color:var(--text-primary);font-weight:600;}
+
+    /* Badges */
+    .pill{display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;font-size:0.72rem;font-weight:700;}
+    .pill-free{background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3);}
+    .pill-paid{background:rgba(201,162,39,0.15);color:var(--accent-gold-light);border:1px solid var(--border-accent);}
+    .pill-vip{background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.3);}
+    .pill-active{background:rgba(74,222,128,0.15);color:#4ade80;border:1px solid rgba(74,222,128,0.3);}
+    .pill-suspended{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.3);}
+
+    /* Action btns */
+    .tbl-actions{display:flex;gap:6px;}
+    .act-btn{
+      padding:5px 12px;border-radius:6px;font-size:0.78rem;font-weight:600;
+      cursor:pointer;transition:.2s ease;border:1px solid var(--border);
+      background:var(--bg-elevated);color:var(--text-secondary);
+    }
+    .act-btn:hover{border-color:var(--accent-gold);color:var(--accent-gold);}
+    .act-btn.danger:hover{border-color:#f87171;color:#f87171;}
+
+    /* Upload form card */
+    .upload-card{
+      background:var(--bg-card);border:1px solid var(--border);
+      border-radius:var(--radius-md);padding:24px;margin-bottom:28px;
+    }
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+    .form-row.full{grid-template-columns:1fr;}
+    .adm-label{display:block;font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:7px;}
+    .adm-input,.adm-select,.adm-textarea{
+      width:100%;background:var(--bg-elevated);
+      border:1px solid var(--border);border-radius:var(--radius-sm);
+      padding:11px 14px;color:var(--text-primary);
+      font-family:'Outfit',sans-serif;font-size:0.9rem;outline:none;
+      transition:.2s ease;
+    }
+    .adm-input:focus,.adm-select:focus,.adm-textarea:focus{
+      border-color:var(--accent-gold);background:rgba(201,162,39,0.05);
+    }
+    .adm-select{appearance:none;cursor:pointer;}
+    .adm-textarea{resize:vertical;min-height:90px;}
+    .upload-zone{
+      border:2px dashed var(--border);border-radius:var(--radius-md);
+      padding:32px;text-align:center;cursor:pointer;
+      transition:.2s ease;background:var(--bg-elevated);
+    }
+    .upload-zone:hover{border-color:var(--accent-gold);background:rgba(201,162,39,0.04);}
+    .upload-zone .uz-icon{font-size:2rem;margin-bottom:10px;}
+    .upload-zone p{color:var(--text-muted);font-size:0.85rem;}
+    .upload-zone strong{color:var(--accent-gold);}
+
+    /* Charts placeholder */
+    .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:28px;}
+    .chart-card{
+      background:var(--bg-card);border:1px solid var(--border);
+      border-radius:var(--radius-md);padding:22px;
+    }
+    .chart-card h3{font-size:0.92rem;font-weight:700;margin-bottom:18px;color:var(--text-secondary);}
+    .bar-chart{display:flex;align-items:flex-end;gap:8px;height:100px;}
+    .bar{
+      flex:1;border-radius:4px 4px 0 0;min-height:8px;
+      background:linear-gradient(to top,var(--accent-gold-dark),var(--accent-gold-light));
+      transition:.3s ease;cursor:pointer;position:relative;
+    }
+    .bar:hover{filter:brightness(1.2);}
+    .bar-labels{display:flex;gap:8px;margin-top:6px;}
+    .bar-lbl{flex:1;text-align:center;font-size:0.65rem;color:var(--text-muted);}
+    .revenue-list{display:flex;flex-direction:column;gap:10px;}
+    .rev-item{display:flex;align-items:center;justify-content:space-between;}
+    .rev-item .rev-label{font-size:0.85rem;color:var(--text-secondary);}
+    .rev-item .rev-val{font-size:0.95rem;font-weight:700;color:var(--accent-gold-light);}
+    .rev-bar-wrap{flex:1;height:6px;background:var(--bg-elevated);border-radius:3px;margin:0 12px;}
+    .rev-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent-gold-light),var(--accent-gold));}
+
+    /* Tab system */
+    .admin-tabs{display:flex;gap:4px;background:var(--bg-elevated);border-radius:var(--radius-md);padding:4px;margin-bottom:22px;width:fit-content;}
+    .admin-tab{
+      padding:8px 20px;border-radius:var(--radius-sm);font-size:0.88rem;font-weight:600;
+      cursor:pointer;color:var(--text-muted);transition:.2s ease;
+    }
+    .admin-tab.active{background:linear-gradient(135deg,var(--accent-gold-light),var(--accent-gold));color:#080808;}
+
+    /* Page sections controlled by tabs */
+    .admin-page{display:none;}
+    .admin-page.active{display:block;}
+
+    /* Sidebar mobile toggle */
+    .sidebar-toggle{
+      display:none;position:fixed;bottom:20px;right:20px;z-index:500;
+      width:50px;height:50px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent-gold-light),var(--accent-gold));
+      border:none;cursor:pointer;font-size:1.3rem;
+      box-shadow:var(--shadow-glow);
+    }
+
+    @media(max-width:900px){
+      .sidebar{transform:translateX(-100%);}.sidebar.open{transform:translateX(0);}
+      .admin-main{margin-left:0;}
+      .sidebar-toggle{display:flex;align-items:center;justify-content:center;}
+      .form-row{grid-template-columns:1fr;}
+      .chart-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+<div class="admin-wrap">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo" style="font-size:1.2rem;">
+        <span class="logo-dex">DEX</span><span class="logo-xi">XI</span> <span class="logo-girl">GIRL</span>
+      </div>
+      <span>Admin</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">Main</div>
+      <a class="nav-item active" onclick="showPage('dashboard',this)">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+
+      <div class="nav-group-label">Content</div>
+      <a class="nav-item" onclick="showPage('videos',this)">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Videos
+        <span class="nav-badge">8</span>
+      </a>
+      <a class="nav-item" onclick="showPage('upload',this)">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload Video
+      </a>
+      <a class="nav-item" onclick="showPage('categories',this)">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 20h16M4 4h6l2 4h8"/></svg>
+        Categories
+      </a>
+
+      <div class="nav-group-label">Users</div>
+      <a class="nav-item" onclick="showPage('members',this)">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Members
+        <span class="nav-badge">142</span>
+      </a>
+      <a class="nav-item" onclick="showPage('subscriptions',this)">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+        Subscriptions
+      </a>
+
+      <div class="nav-group-label">Finance</div>
+      <a class="nav-item" onclick="showPage('payments',this)">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Payments
+      </a>
+      <a class="nav-item" onclick="showPage('analytics',this)">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analytics
+      </a>
+
+      <div class="nav-group-label">System</div>
+      <a class="nav-item" onclick="showPage('settings',this)">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Settings
+      </a>
+      <a href="index.html" class="nav-item" style="margin-top:auto;">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        View Site
+      </a>
+    </nav>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div class="topbar-title" id="pageTitle">Dashboard</div>
+      <div class="topbar-right">
+        <div class="nav-search" style="width:220px;">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" placeholder="Search…" style="width:160px;"/>
+        </div>
+        <div class="admin-avatar" title="Admin">A</div>
+      </div>
+    </div>
+
+    <div class="admin-content">
+
+      <!-- ══════════ DASHBOARD ══════════ -->
+      <div class="admin-page active" id="page-dashboard">
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-icon">🎬</div>
+            <div class="stat-info">
+              <div class="val">8</div>
+              <div class="lbl">Total Videos</div>
+              <div class="chg">↑ 2 this week</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-info">
+              <div class="val">142</div>
+              <div class="lbl">Members</div>
+              <div class="chg">↑ 14 this month</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💰</div>
+            <div class="stat-info">
+              <div class="val">$3,480</div>
+              <div class="lbl">Monthly Revenue</div>
+              <div class="chg">↑ 22% vs last month</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">👁️</div>
+            <div class="stat-info">
+              <div class="val">48K</div>
+              <div class="lbl">Total Views</div>
+              <div class="chg">↑ 8K this week</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-grid">
+          <div class="chart-card">
+            <h3>Views – Last 7 Days</h3>
+            <div class="bar-chart">
+              <div class="bar" style="height:40%;" title="Mon"></div>
+              <div class="bar" style="height:60%;" title="Tue"></div>
+              <div class="bar" style="height:45%;" title="Wed"></div>
+              <div class="bar" style="height:80%;" title="Thu"></div>
+              <div class="bar" style="height:65%;" title="Fri"></div>
+              <div class="bar" style="height:90%;" title="Sat"></div>
+              <div class="bar" style="height:75%;" title="Sun"></div>
+            </div>
+            <div class="bar-labels">
+              <span class="bar-lbl">Mon</span><span class="bar-lbl">Tue</span><span class="bar-lbl">Wed</span>
+              <span class="bar-lbl">Thu</span><span class="bar-lbl">Fri</span><span class="bar-lbl">Sat</span>
+              <span class="bar-lbl">Sun</span>
+            </div>
+          </div>
+          <div class="chart-card">
+            <h3>Revenue by Gateway</h3>
+            <div class="revenue-list">
+              <div class="rev-item">
+                <span class="rev-label">CCBill</span>
+                <div class="rev-bar-wrap"><div class="rev-bar-fill" style="width:72%"></div></div>
+                <span class="rev-val">$2,506</span>
+              </div>
+              <div class="rev-item">
+                <span class="rev-label">Epoch</span>
+                <div class="rev-bar-wrap"><div class="rev-bar-fill" style="width:28%"></div></div>
+                <span class="rev-val">$974</span>
+              </div>
+              <div class="rev-item">
+                <span class="rev-label">Card</span>
+                <div class="rev-bar-wrap"><div class="rev-bar-fill" style="width:12%"></div></div>
+                <span class="rev-val">$418</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent members -->
+        <div class="section-hd"><h2>Recent Signups</h2></div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Username</th><th>Email</th><th>Plan</th><th>Joined</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="tbl-title">luxefan99</td><td>luxe***@gmail.com</td><td><span class="pill pill-vip">VIP Gold</span></td><td>14 Mar 2026</td><td><span class="pill pill-active">Active</span></td></tr>
+              <tr><td class="tbl-title">nightowl</td><td>nigh***@yahoo.com</td><td><span class="pill pill-paid">Premium</span></td><td>13 Mar 2026</td><td><span class="pill pill-active">Active</span></td></tr>
+              <tr><td class="tbl-title">cinemastar</td><td>cine***@gmail.com</td><td><span class="pill pill-free">Basic</span></td><td>12 Mar 2026</td><td><span class="pill pill-active">Active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════ VIDEOS ══════════ -->
+      <div class="admin-page" id="page-videos">
+        <div class="section-hd">
+          <h2>All Videos</h2>
+          <button class="btn btn-primary" style="padding:9px 20px;font-size:0.88rem;" onclick="showPage('upload',document.querySelector('.nav-item:nth-child(5)'))">+ Upload New</button>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Thumb</th><th>Title</th><th>Category</th><th>Access</th><th>Quality</th><th>Views</th><th>Actions</th></tr></thead>
+            <tbody id="videoTableBody">
+              <tr>
+                <td><img class="tbl-thumb" src="assets/images/thumb7.png" alt=""/></td>
+                <td class="tbl-title">City Lights – Night Edition Vol. 1</td>
+                <td>Most Popular</td><td><span class="pill pill-free">Free Preview</span></td><td>4K</td><td>124K</td>
+                <td><div class="tbl-actions"><button class="act-btn" onclick="editVideo(this)">✏️ Edit</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️ Delete</button></div></td>
+              </tr>
+              <tr>
+                <td><img class="tbl-thumb" src="assets/images/thumb5.png" alt=""/></td>
+                <td class="tbl-title">Unveiling Elegance – Studio Series</td>
+                <td>Glamour</td><td><span class="pill pill-paid">Members Only</span></td><td>HD</td><td>98K</td>
+                <td><div class="tbl-actions"><button class="act-btn" onclick="editVideo(this)">✏️ Edit</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️ Delete</button></div></td>
+              </tr>
+              <tr>
+                <td><img class="tbl-thumb" src="assets/images/thumb4.png" alt=""/></td>
+                <td class="tbl-title">Red Stage – Dramatic Performance</td>
+                <td>New Releases</td><td><span class="pill pill-paid">Members Only</span></td><td>HD</td><td>56K</td>
+                <td><div class="tbl-actions"><button class="act-btn" onclick="editVideo(this)">✏️ Edit</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️ Delete</button></div></td>
+              </tr>
+              <tr>
+                <td><img class="tbl-thumb" src="assets/images/thumb6.png" alt=""/></td>
+                <td class="tbl-title">Luxury Morning – Penthouse Collection</td>
+                <td>Luxury</td><td><span class="pill pill-paid">Members Only</span></td><td>4K</td><td>78K</td>
+                <td><div class="tbl-actions"><button class="act-btn" onclick="editVideo(this)">✏️ Edit</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️ Delete</button></div></td>
+              </tr>
+              <tr>
+                <td><img class="tbl-thumb" src="assets/images/slide1.png" alt=""/></td>
+                <td class="tbl-title">Golden Hour – Studio Sessions Vol. 1</td>
+                <td>Most Popular</td><td><span class="pill pill-vip">VIP Only</span></td><td>4K</td><td>203K</td>
+                <td><div class="tbl-actions"><button class="act-btn" onclick="editVideo(this)">✏️ Edit</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️ Delete</button></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════ UPLOAD ══════════ -->
+      <div class="admin-page" id="page-upload">
+        <div class="section-hd"><h2>Upload New Video</h2></div>
+        <div class="upload-card">
+          <div class="form-row">
+            <div>
+              <label class="adm-label">Video Title *</label>
+              <input class="adm-input" type="text" placeholder="e.g. Golden Hour – Studio Sessions Vol. 2"/>
+            </div>
+            <div>
+              <label class="adm-label">Model Name</label>
+              <input class="adm-input" type="text" placeholder="e.g. Alexa V."/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label class="adm-label">Category</label>
+              <select class="adm-select">
+                <option>Most Popular</option><option>New Releases</option><option>Solo</option>
+                <option>Couples</option><option>Glamour</option><option>Night Sessions</option>
+                <option>Luxury</option><option>Behind The Scenes</option>
+              </select>
+            </div>
+            <div>
+              <label class="adm-label">Access Level</label>
+              <select class="adm-select">
+                <option>Free Preview (all users)</option>
+                <option>Members Only (Basic+)</option>
+                <option>Premium Members Only</option>
+                <option>VIP Gold Only</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label class="adm-label">Streaming Quality</label>
+              <select class="adm-select">
+                <option>4K Ultra HD (2160p)</option>
+                <option>Full HD (1080p)</option>
+                <option>HD (720p)</option>
+                <option>SD (360p)</option>
+              </select>
+            </div>
+            <div>
+              <label class="adm-label">Tags (comma separated)</label>
+              <input class="adm-input" type="text" placeholder="e.g. solo, glamour, candlelight"/>
+            </div>
+          </div>
+          <div class="form-row full">
+            <label class="adm-label">Description</label>
+            <textarea class="adm-textarea" placeholder="Short description shown on the video page…"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label class="adm-label">Upload Full Video File</label>
+              <div class="upload-zone" onclick="document.getElementById('videoFile').click()">
+                <div class="uz-icon">🎬</div>
+                <p><strong>Click to upload</strong> or drag & drop</p>
+                <p style="margin-top:4px;font-size:0.75rem;">MP4, MOV, AVI – Max 5GB</p>
+                <input type="file" id="videoFile" accept="video/*" style="display:none" onchange="fileChosen(this,'videoFileLabel')" />
+              </div>
+              <p id="videoFileLabel" style="margin-top:8px;font-size:0.8rem;color:var(--accent-gold);"></p>
+            </div>
+            <div>
+              <label class="adm-label">Upload Trailer / Preview Clip</label>
+              <div class="upload-zone" onclick="document.getElementById('trailerFile').click()">
+                <div class="uz-icon">▶️</div>
+                <p><strong>Click to upload</strong> trailer</p>
+                <p style="margin-top:4px;font-size:0.75rem;">MP4, MOV – Max 500MB</p>
+                <input type="file" id="trailerFile" accept="video/*" style="display:none" onchange="fileChosen(this,'trailerFileLabel')"/>
+              </div>
+              <p id="trailerFileLabel" style="margin-top:8px;font-size:0.8rem;color:var(--accent-gold);"></p>
+            </div>
+          </div>
+
+          <div class="form-row full">
+            <label class="adm-label">Upload Thumbnail Image</label>
+            <div class="upload-zone" style="max-width:320px;" onclick="document.getElementById('thumbFile').click()">
+              <div class="uz-icon">🖼️</div>
+              <p><strong>Click to upload</strong> thumbnail</p>
+              <p style="margin-top:4px;font-size:0.75rem;">JPG, PNG, WebP – 16:9 recommended</p>
+              <input type="file" id="thumbFile" accept="image/*" style="display:none" onchange="previewThumb(this)"/>
+            </div>
+            <img id="thumbPreview" style="display:none;margin-top:12px;max-width:200px;border-radius:8px;border:1px solid var(--border);" alt="Thumbnail preview"/>
+          </div>
+
+          <div style="display:flex;gap:12px;margin-top:8px;">
+            <button class="btn btn-primary" onclick="submitVideo()" style="padding:12px 32px;">🚀 Publish Video</button>
+            <button class="btn btn-outline" style="padding:12px 24px;">Save as Draft</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ CATEGORIES ══════════ -->
+      <div class="admin-page" id="page-categories">
+        <div class="section-hd"><h2>Manage Categories</h2></div>
+        <div class="upload-card" style="max-width:540px;margin-bottom:22px;">
+          <label class="adm-label">Add New Category</label>
+          <div style="display:flex;gap:10px;margin-top:4px;">
+            <input class="adm-input" type="text" placeholder="Category name e.g. VIP Exclusives" id="newCatInput"/>
+            <button class="btn btn-primary" style="padding:10px 22px;white-space:nowrap;" onclick="addCategory()">+ Add</button>
+          </div>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Name</th><th>Videos</th><th>Slug</th><th>Actions</th></tr></thead>
+            <tbody id="catTableBody">
+              <tr><td class="tbl-title">Most Popular</td><td>2</td><td>popular</td><td><div class="tbl-actions"><button class="act-btn" onclick="editCat(this)">✏️ Rename</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️</button></div></td></tr>
+              <tr><td class="tbl-title">New Releases</td><td>1</td><td>new</td><td><div class="tbl-actions"><button class="act-btn" onclick="editCat(this)">✏️ Rename</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️</button></div></td></tr>
+              <tr><td class="tbl-title">Solo</td><td>1</td><td>solo</td><td><div class="tbl-actions"><button class="act-btn" onclick="editCat(this)">✏️ Rename</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️</button></div></td></tr>
+              <tr><td class="tbl-title">Glamour</td><td>1</td><td>glamour</td><td><div class="tbl-actions"><button class="act-btn" onclick="editCat(this)">✏️ Rename</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️</button></div></td></tr>
+              <tr><td class="tbl-title">Luxury</td><td>1</td><td>luxury</td><td><div class="tbl-actions"><button class="act-btn" onclick="editCat(this)">✏️ Rename</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️</button></div></td></tr>
+              <tr><td class="tbl-title">Night Sessions</td><td>1</td><td>night</td><td><div class="tbl-actions"><button class="act-btn" onclick="editCat(this)">✏️ Rename</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️</button></div></td></tr>
+              <tr><td class="tbl-title">Couples</td><td>1</td><td>couple</td><td><div class="tbl-actions"><button class="act-btn" onclick="editCat(this)">✏️ Rename</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️</button></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════ MEMBERS ══════════ -->
+      <div class="admin-page" id="page-members">
+        <div class="section-hd">
+          <h2>Member Management</h2>
+          <div class="nav-search" style="width:260px;">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" placeholder="Search members…" oninput="filterMembers(this.value)"/>
+          </div>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Username</th><th>Email</th><th>Plan</th><th>Joined</th><th>Payments</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="memberTableBody">
+              <tr><td class="tbl-title">luxefan99</td><td>luxe***@gmail.com</td><td><span class="pill pill-vip">VIP Gold</span></td><td>14 Mar 2026</td><td>$34.99/mo</td><td><span class="pill pill-active">Active</span></td><td><div class="tbl-actions"><button class="act-btn">👁 View</button><button class="act-btn danger" onclick="suspendMember(this)">🚫 Suspend</button></div></td></tr>
+              <tr><td class="tbl-title">nightowl</td><td>nigh***@yahoo.com</td><td><span class="pill pill-paid">Premium</span></td><td>13 Mar 2026</td><td>$19.99/mo</td><td><span class="pill pill-active">Active</span></td><td><div class="tbl-actions"><button class="act-btn">👁 View</button><button class="act-btn danger" onclick="suspendMember(this)">🚫 Suspend</button></div></td></tr>
+              <tr><td class="tbl-title">cinemastar</td><td>cine***@gmail.com</td><td><span class="pill pill-free">Basic</span></td><td>12 Mar 2026</td><td>$9.99/mo</td><td><span class="pill pill-active">Active</span></td><td><div class="tbl-actions"><button class="act-btn">👁 View</button><button class="act-btn danger" onclick="suspendMember(this)">🚫 Suspend</button></div></td></tr>
+              <tr><td class="tbl-title">goldmember</td><td>gold***@icloud.com</td><td><span class="pill pill-vip">VIP Gold</span></td><td>10 Mar 2026</td><td>$34.99/mo</td><td><span class="pill pill-suspended">Suspended</span></td><td><div class="tbl-actions"><button class="act-btn">👁 View</button><button class="act-btn" onclick="suspendMember(this)">✅ Restore</button></div></td></tr>
+              <tr><td class="tbl-title">velvet22</td><td>velv***@gmail.com</td><td><span class="pill pill-paid">Premium</span></td><td>9 Mar 2026</td><td>$19.99/mo</td><td><span class="pill pill-active">Active</span></td><td><div class="tbl-actions"><button class="act-btn">👁 View</button><button class="act-btn danger" onclick="suspendMember(this)">🚫 Suspend</button></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════ SUBSCRIPTIONS ══════════ -->
+      <div class="admin-page" id="page-subscriptions">
+        <div class="section-hd"><h2>Active Subscriptions</h2></div>
+        <div class="stat-grid" style="max-width:700px;">
+          <div class="stat-card"><div class="stat-icon">🥇</div><div class="stat-info"><div class="val">34</div><div class="lbl">VIP Gold</div></div></div>
+          <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-info"><div class="val">81</div><div class="lbl">Premium</div></div></div>
+          <div class="stat-card"><div class="stat-icon">🔓</div><div class="stat-info"><div class="val">27</div><div class="lbl">Basic</div></div></div>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Member</th><th>Plan</th><th>Started</th><th>Next Billing</th><th>Amount</th><th>Gateway</th></tr></thead>
+            <tbody>
+              <tr><td class="tbl-title">luxefan99</td><td><span class="pill pill-vip">VIP Gold</span></td><td>14 Feb 2026</td><td>14 Apr 2026</td><td>$34.99</td><td>CCBill</td></tr>
+              <tr><td class="tbl-title">nightowl</td><td><span class="pill pill-paid">Premium</span></td><td>13 Feb 2026</td><td>13 Apr 2026</td><td>$19.99</td><td>Epoch</td></tr>
+              <tr><td class="tbl-title">velvet22</td><td><span class="pill pill-paid">Premium</span></td><td>9 Mar 2026</td><td>9 Apr 2026</td><td>$19.99</td><td>CCBill</td></tr>
+              <tr><td class="tbl-title">cinemastar</td><td><span class="pill pill-free">Basic</span></td><td>12 Mar 2026</td><td>12 Apr 2026</td><td>$9.99</td><td>Epoch</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════ PAYMENTS ══════════ -->
+      <div class="admin-page" id="page-payments">
+        <div class="section-hd"><h2>Payment Dashboard</h2></div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-info"><div class="val">$3,480</div><div class="lbl">This Month</div><div class="chg">↑ 22%</div></div></div>
+          <div class="stat-card"><div class="stat-icon">🏦</div><div class="stat-info"><div class="val">$2,506</div><div class="lbl">CCBill</div></div></div>
+          <div class="stat-card"><div class="stat-icon">💳</div><div class="stat-info"><div class="val">$974</div><div class="lbl">Epoch</div></div></div>
+          <div class="stat-card"><div class="stat-icon">🔄</div><div class="stat-info"><div class="val">2</div><div class="lbl">Refund Requests</div></div></div>
+        </div>
+        <div class="section-hd" style="margin-top:8px;"><h2>Recent Transactions</h2></div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Date</th><th>Member</th><th>Plan</th><th>Amount</th><th>Gateway</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>16 Mar 2026</td><td class="tbl-title">luxefan99</td><td>VIP Gold</td><td style="color:var(--accent-gold-light);font-weight:700;">+$34.99</td><td>CCBill</td><td><span class="pill pill-active">Paid</span></td></tr>
+              <tr><td>15 Mar 2026</td><td class="tbl-title">nightowl</td><td>Premium</td><td style="color:var(--accent-gold-light);font-weight:700;">+$19.99</td><td>Epoch</td><td><span class="pill pill-active">Paid</span></td></tr>
+              <tr><td>14 Mar 2026</td><td class="tbl-title">velvet22</td><td>Premium</td><td style="color:var(--accent-gold-light);font-weight:700;">+$19.99</td><td>CCBill</td><td><span class="pill pill-active">Paid</span></td></tr>
+              <tr><td>13 Mar 2026</td><td class="tbl-title">goldmember</td><td>VIP Gold</td><td style="color:#f87171;font-weight:700;">−$34.99</td><td>CCBill</td><td><span class="pill pill-suspended">Refunded</span></td></tr>
+              <tr><td>12 Mar 2026</td><td class="tbl-title">cinemastar</td><td>Basic</td><td style="color:var(--accent-gold-light);font-weight:700;">+$9.99</td><td>Epoch</td><td><span class="pill pill-active">Paid</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════ ANALYTICS ══════════ -->
+      <div class="admin-page" id="page-analytics">
+        <div class="section-hd"><h2>Analytics</h2></div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-icon">📺</div><div class="stat-info"><div class="val">48K</div><div class="lbl">Total Views</div></div></div>
+          <div class="stat-card"><div class="stat-icon">⏱️</div><div class="stat-info"><div class="val">24 min</div><div class="lbl">Avg Watch Time</div></div></div>
+          <div class="stat-card"><div class="stat-icon">🔄</div><div class="stat-info"><div class="val">68%</div><div class="lbl">Renewal Rate</div></div></div>
+          <div class="stat-card"><div class="stat-icon">📈</div><div class="stat-info"><div class="val">$24.50</div><div class="lbl">Avg Revenue/User</div></div></div>
+        </div>
+        <div class="section-hd" style="margin-top:8px;"><h2>Top Performing Videos</h2></div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Title</th><th>Views</th><th>Avg Watch %</th><th>Conversions</th></tr></thead>
+            <tbody>
+              <tr><td class="tbl-title">Golden Hour – Studio Sessions</td><td>203K</td><td>78%</td><td>34 upgrades</td></tr>
+              <tr><td class="tbl-title">City Lights – Night Edition</td><td>124K</td><td>92%</td><td>28 upgrades</td></tr>
+              <tr><td class="tbl-title">Luxury Morning – Penthouse</td><td>78K</td><td>65%</td><td>19 upgrades</td></tr>
+              <tr><td class="tbl-title">Candlelight Session</td><td>89K</td><td>71%</td><td>22 upgrades</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════ SETTINGS ══════════ -->
+      <div class="admin-page" id="page-settings">
+        <div class="section-hd"><h2>Site Settings</h2></div>
+        <div class="upload-card" style="max-width:640px;">
+          <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:18px;color:var(--accent-gold-light);">General</h3>
+          <div class="form-row full"><label class="adm-label">Site Name</label><input class="adm-input" value="DEXXIGIRL"/></div>
+          <div class="form-row full"><label class="adm-label">Domain</label><input class="adm-input" value="dexxigirl.com"/></div>
+          <div class="form-row"><div><label class="adm-label">CCBill Merchant ID</label><input class="adm-input" placeholder="e.g. 123456"/></div><div><label class="adm-label">Epoch Account ID</label><input class="adm-input" placeholder="e.g. EP-789"/></div></div>
+          <h3 style="font-size:0.95rem;font-weight:700;margin:24px 0 18px;color:var(--accent-gold-light);">Age Gate</h3>
+          <div class="form-row full">
+            <label class="adm-label" style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <input type="checkbox" checked style="accent-color:var(--accent-gold);width:16px;height:16px;"/>
+              Enable age verification gate on homepage
+            </label>
+          </div>
+          <h3 style="font-size:0.95rem;font-weight:700;margin:24px 0 18px;color:var(--accent-gold-light);">Admin Password</h3>
+          <div class="form-row"><div><label class="adm-label">New Password</label><input class="adm-input" type="password" placeholder="Enter new password"/></div><div><label class="adm-label">Confirm Password</label><input class="adm-input" type="password" placeholder="Confirm password"/></div></div>
+          <button class="btn btn-primary" style="margin-top:12px;padding:12px 28px;" onclick="showToast('✅ Settings saved!')">Save Settings</button>
+        </div>
+      </div>
+
+    </div><!-- end admin-content -->
+  </main>
+
+  <button class="sidebar-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
+
+<script>
+function showPage(id, el) {
+  document.querySelectorAll('.admin-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  if(el) el.classList.add('active');
+  const titles={dashboard:'Dashboard',videos:'Videos',upload:'Upload Video',categories:'Categories',members:'Members',subscriptions:'Subscriptions',payments:'Payments',analytics:'Analytics',settings:'Settings'};
+  document.getElementById('pageTitle').textContent = titles[id]||id;
+}
+function showToast(msg){
+  const t=document.getElementById('toast'),m=document.getElementById('toastMsg');
+  m.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+function deleteRow(btn){
+  if(confirm('Delete this item?')) btn.closest('tr').remove();
+}
+function editVideo(btn){
+  const row=btn.closest('tr');
+  const title=row.querySelector('.tbl-title').textContent;
+  showPage('upload',null);
+  document.querySelector('#page-upload .adm-input').value=title;
+  document.getElementById('pageTitle').textContent='Edit Video';
+  showToast('✏️ Editing: '+title);
+}
+function editCat(btn){
+  const td=btn.closest('tr').querySelector('.tbl-title');
+  const name=prompt('Rename category:',td.textContent);
+  if(name) td.textContent=name;
+}
+function addCategory(){
+  const input=document.getElementById('newCatInput');
+  const name=input.value.trim();
+  if(!name)return;
+  const tbody=document.getElementById('catTableBody');
+  const slug=name.toLowerCase().replace(/\s+/g,'-');
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td class="tbl-title">${name}</td><td>0</td><td>${slug}</td><td><div class="tbl-actions"><button class="act-btn" onclick="editCat(this)">✏️ Rename</button><button class="act-btn danger" onclick="deleteRow(this)">🗑️</button></div></td>`;
+  tbody.appendChild(tr);
+  input.value='';
+  showToast('✅ Category "'+name+'" added!');
+}
+function suspendMember(btn){
+  const row=btn.closest('tr');
+  const pill=row.querySelector('.pill:last-of-type');
+  if(pill.classList.contains('pill-suspended')){
+    pill.className='pill pill-active';pill.textContent='Active';
+    btn.textContent='🚫 Suspend';btn.classList.remove('act-btn');btn.className='act-btn danger';
+  } else {
+    pill.className='pill pill-suspended';pill.textContent='Suspended';
+    btn.textContent='✅ Restore';btn.className='act-btn';
+  }
+}
+function filterMembers(q){
+  const rows=document.querySelectorAll('#memberTableBody tr');
+  rows.forEach(r=>{
+    r.style.display=r.textContent.toLowerCase().includes(q.toLowerCase())?'':'none';
+  });
+}
+function fileChosen(input,labelId){
+  const f=input.files[0];
+  if(f) document.getElementById(labelId).textContent='✅ '+f.name;
+}
+function previewThumb(input){
+  const f=input.files[0];
+  if(f){
+    const img=document.getElementById('thumbPreview');
+    img.src=URL.createObjectURL(f);img.style.display='block';
+  }
+}
+function submitVideo(){
+  const title=document.querySelector('#page-upload .adm-input').value.trim();
+  if(!title){showToast('⚠️ Please enter a video title.');return;}
+  showToast('🚀 Video "'+title+'" published!');
+  setTimeout(()=>showPage('videos',document.querySelectorAll('.nav-item')[2]),1000);
+}
+</script>
+</body>
+</html>

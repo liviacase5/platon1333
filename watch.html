@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description" content="Watch City Lights – Night Edition on DexxiGirl. Free preview available." />
+    <title>City Lights – Night Edition | DexxiGirl</title>
+    <link rel="stylesheet" href="assets/style.css" />
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar scrolled">
+        <a href="index.html" class="logo"><span class="dexi">Dex</span><span class="girl">xiGirl</span><span
+                class="logo-dot">.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#videos">Videos</a></li>
+            <li><a href="membership.html">Membership</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="login.html" class="btn btn-outline" style="padding:9px 20px;font-size:0.9rem;">Sign In</a>
+            <a href="membership.html" class="btn btn-primary" style="padding:9px 20px;font-size:0.9rem;">Join Now</a>
+        </div>
+    </nav>
+
+    <div class="player-page">
+        <div class="player-container">
+
+            <!-- BREADCRUMB -->
+            <div
+                style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:var(--text-muted);margin-bottom:20px;">
+                <a href="index.html" style="color:var(--text-muted);transition:var(--transition);"
+                    onmouseover="this.style.color='var(--accent-red)'"
+                    onmouseout="this.style.color='var(--text-muted)'">Home</a>
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6" />
+                </svg>
+                <a href="#" style="color:var(--text-muted);">Night Sessions</a>
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6" />
+                </svg>
+                <span style="color:var(--text-primary);">City Lights – Night Edition Vol. 1</span>
+            </div>
+
+            <!-- VIDEO PLAYER -->
+            <div class="player-wrapper">
+                <img class="player-thumb" src="assets/images/thumb7.png" alt="City Lights Preview" />
+
+                <!-- free preview plays (simulated) -->
+                <div class="player-controls" id="playerControls">
+                    <div class="progress-bar" onclick="seekBar(event)">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="ctrl-row">
+                        <button class="ctrl-btn" onclick="togglePlay()" id="playPauseBtn" title="Play/Pause">
+                            <svg id="playIcon" width="20" height="20" fill="white" viewBox="0 0 24 24">
+                                <polygon points="5 3 19 12 5 21 5 3" />
+                            </svg>
+                        </button>
+                        <button class="ctrl-btn" title="Rewind 10s">
+                            <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                                <polyline points="1 4 1 10 7 10" />
+                                <path d="M3.51 15a9 9 0 1 0 .49-3.93" />
+                            </svg>
+                        </button>
+                        <span class="ctrl-time" id="ctrlTime">02:14 / 18:24</span>
+                        <button class="ctrl-btn" title="Volume">
+                            <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                            </svg>
+                        </button>
+                        <div class="ctrl-spacer"></div>
+                        <span
+                            style="background:var(--accent-red);color:#fff;font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:4px;">FREE
+                            PREVIEW</span>
+                        <button class="ctrl-btn" title="Settings">
+                            <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="3" />
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                            </svg>
+                        </button>
+                        <button class="ctrl-btn" title="Fullscreen">
+                            <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                                <polyline points="15 3 21 3 21 9" />
+                                <polyline points="9 21 3 21 3 15" />
+                                <line x1="21" y1="3" x2="14" y2="10" />
+                                <line x1="3" y1="21" x2="10" y2="14" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- LOCK OVERLAY (shows after preview) -->
+                <div class="player-locked-msg" id="lockedMsg" style="display:none;">
+                    <svg width="52" height="52" fill="none" stroke="var(--accent-gold)" stroke-width="1.5"
+                        viewBox="0 0 24 24">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0110 0v4" />
+                    </svg>
+                    <h3>Members Only Content</h3>
+                    <p>You've used your free preview. Upgrade your membership to watch the full video in 4K HD.</p>
+                    <a href="membership.html" class="btn btn-primary">🔓 Unlock Full Video</a>
+                    <a href="login.html" style="font-size:0.85rem;color:var(--text-muted);margin-top:8px;">Already a
+                        member? Sign In →</a>
+                </div>
+            </div>
+
+            <!-- VIDEO INFO + SIDEBAR -->
+            <div class="video-info-section">
+                <div class="video-info">
+                    <h1 class="video-title-big">City Lights – Night Edition Vol. 1</h1>
+                    <div class="video-meta-row">
+                        <span>
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            124,381 views
+                        </span>
+                        <span class="dot-sep">•</span>
+                        <span>Added: Feb 20, 2025</span>
+                        <span class="dot-sep">•</span>
+                        <span style="color:var(--accent-gold);">★ 4.9 (2.1k ratings)</span>
+                        <span class="dot-sep">•</span>
+                        <span
+                            style="background:var(--accent-red);color:#fff;padding:2px 10px;border-radius:4px;font-size:0.75rem;font-weight:700;">4K
+                            HD</span>
+                        <span>18:24 min</span>
+                    </div>
+                    <div class="video-actions">
+                        <button class="btn btn-outline" style="padding:9px 18px;font-size:0.88rem;"
+                            onclick="showToast('❤️ Added to Favourites!')">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg>
+                            Favourite
+                        </button>
+                        <button class="btn btn-outline" style="padding:9px 18px;font-size:0.88rem;"
+                            onclick="showToast('📤 Link copied!')">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <circle cx="18" cy="5" r="3" />
+                                <circle cx="6" cy="12" r="3" />
+                                <circle cx="18" cy="19" r="3" />
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                            </svg>
+                            Share
+                        </button>
+                        <a href="membership.html" class="btn btn-primary" style="padding:9px 18px;font-size:0.88rem;">
+                            🔓 Unlock Full Video
+                        </a>
+                    </div>
+                    <div style="margin-bottom:20px;">
+                        <p style="color:var(--text-secondary);font-size:0.92rem;line-height:1.8;">An intimate cinematic
+                            experience with soft city lights as the perfect backdrop. This is the first volume of our
+                            new Night Edition series, featuring exclusive premium content shot in 4K Ultra HD.</p>
+                    </div>
+                    <div style="margin-bottom:10px;font-size:0.85rem;font-weight:600;color:var(--text-muted);">Tags:
+                    </div>
+                    <div class="video-tags">
+                        <span class="tag">Night Session</span>
+                        <span class="tag">City Lights</span>
+                        <span class="tag">Solo</span>
+                        <span class="tag">4K HD</span>
+                        <span class="tag">Premium</span>
+                        <span class="tag">Vol. 1</span>
+                    </div>
+                </div>
+
+                <!-- UPGRADE SIDEBAR -->
+                <div class="upgrade-sidebar">
+                    <div style="font-size:2rem;margin-bottom:12px;">👑</div>
+                    <h3>Unlock Full Access</h3>
+                    <p>Get unlimited streaming of all 100+ videos in 4K Ultra HD. Cancel anytime.</p>
+                    <div class="upgrade-price">$9.99 <span>/month</span></div>
+                    <div class="upgrade-features">
+                        <div class="upgrade-feature">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"
+                                viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            100+ Exclusive Videos
+                        </div>
+                        <div class="upgrade-feature">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"
+                                viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            4K Ultra HD Quality
+                        </div>
+                        <div class="upgrade-feature">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"
+                                viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            Ad-Free Streaming
+                        </div>
+                        <div class="upgrade-feature">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"
+                                viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            Discreet Billing
+                        </div>
+                        <div class="upgrade-feature">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"
+                                viewBox="0 0 24 24">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            Cancel Anytime
+                        </div>
+                    </div>
+                    <a href="membership.html" class="btn btn-primary"
+                        style="width:100%;justify-content:center;margin-bottom:12px;">Start Membership</a>
+                    <a href="login.html"
+                        style="display:block;text-align:center;font-size:0.83rem;color:var(--text-muted);">Already a
+                        member? <span style="color:var(--accent-red);">Sign In</span></a>
+                </div>
+            </div>
+
+            <!-- RELATED VIDEOS -->
+            <div style="margin-top:60px;">
+                <div class="section-header">
+                    <h2 class="section-title">More Videos You'll Love</h2>
+                    <a href="index.html" class="view-all">View All →</a>
+                </div>
+                <div class="video-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
+                    <div class="video-card" onclick="window.location.href='membership.html'">
+                        <div class="thumb-container">
+                            <img src="assets/images/thumb5.png" alt="" />
+                            <div class="thumb-overlay">
+                                <div class="play-btn-large"><svg width="22" height="22" viewBox="0 0 24 24"
+                                        fill="white">
+                                        <polygon points="5 3 19 12 5 21 5 3" />
+                                    </svg></div>
+                            </div>
+                            <div class="thumb-badges"><span class="badge badge-lock">🔒 Members</span></div>
+                            <div class="card-duration">31:47</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">Unveiling Elegance – Studio Series</div>
+                            <div class="card-meta"><span>98K views</span><span class="card-rating">★★★★★</span></div>
+                        </div>
+                    </div>
+                    <div class="video-card" onclick="window.location.href='membership.html'">
+                        <div class="thumb-container">
+                            <img src="assets/images/thumb4.png" alt="" />
+                            <div class="thumb-overlay">
+                                <div class="play-btn-large"><svg width="22" height="22" viewBox="0 0 24 24"
+                                        fill="white">
+                                        <polygon points="5 3 19 12 5 21 5 3" />
+                                    </svg></div>
+                            </div>
+                            <div class="thumb-badges"><span class="badge badge-new">New</span></div>
+                            <div class="card-duration">24:15</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">Red Stage – Dramatic Performance</div>
+                            <div class="card-meta"><span>56K views</span><span class="card-rating">★★★★☆</span></div>
+                        </div>
+                    </div>
+                    <div class="video-card" onclick="window.location.href='membership.html'">
+                        <div class="thumb-container">
+                            <img src="assets/images/thumb8.png" alt="" />
+                            <div class="thumb-overlay">
+                                <div class="play-btn-large"><svg width="22" height="22" viewBox="0 0 24 24"
+                                        fill="white">
+                                        <polygon points="5 3 19 12 5 21 5 3" />
+                                    </svg></div>
+                            </div>
+                            <div class="thumb-badges"><span class="badge badge-new">New</span><span
+                                    class="badge badge-hd">4K</span></div>
+                            <div class="card-duration">35:50</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">Evening Elegance – Rooftop Dusk Series</div>
+                            <div class="card-meta"><span>41K views</span><span class="card-rating">★★★★☆</span></div>
+                        </div>
+                    </div>
+                    <div class="video-card" onclick="window.location.href='membership.html'">
+                        <div class="thumb-container">
+                            <img src="assets/images/thumb1.png" alt="" />
+                            <div class="thumb-overlay">
+                                <div class="play-btn-large"><svg width="22" height="22" viewBox="0 0 24 24"
+                                        fill="white">
+                                        <polygon points="5 3 19 12 5 21 5 3" />
+                                    </svg></div>
+                            </div>
+                            <div class="thumb-badges"><span class="badge badge-lock">🔒 Members</span></div>
+                            <div class="card-duration">28:33</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">Candlelight Session – Intimate Winter</div>
+                            <div class="card-meta"><span>89K views</span><span class="card-rating">★★★★★</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end player-container -->
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"><span id="toastMsg"></span></div>
+
+    <!-- FOOTER -->
+    <footer class="footer" style="margin-top:60px;">
+        <div class="footer-bottom">
+            <p>© 2025 DexxiGirl. All rights reserved. | 18+ Adults Only</p>
+            <div class="payment-icons">
+                <span class="payment-icon">CCBill</span>
+                <span class="payment-icon">Epoch</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/main.js"></script>
+    <script>
+        // Simulated video player
+        let isPlaying = false;
+        let progress = 0;
+        let previewMaxPercent = 12; // 12% = about 2:14 of 18:24
+        let interval;
+        let previewDone = false;
+
+        function togglePlay() {
+            if (previewDone) { showLockedScreen(); return; }
+            isPlaying = !isPlaying;
+            const icon = document.getElementById('playIcon');
+            if (isPlaying) {
+                icon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+                interval = setInterval(tickProgress, 500);
+            } else {
+                icon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+                clearInterval(interval);
+            }
+        }
+
+        function tickProgress() {
+            progress += 0.45;
+            if (progress >= previewMaxPercent) {
+                progress = previewMaxPercent;
+                isPlaying = false;
+                previewDone = true;
+                clearInterval(interval);
+                setTimeout(showLockedScreen, 600);
+            }
+            updateProgressUI();
+        }
+
+        function updateProgressUI() {
+            document.getElementById('progressFill').style.width = progress + '%';
+            const totalSec = 18 * 60 + 24;
+            const currentSec = Math.round((progress / 100) * totalSec);
+            const mm = Math.floor(currentSec / 60).toString().padStart(2, '0');
+            const ss = (currentSec % 60).toString().padStart(2, '0');
+            document.getElementById('ctrlTime').textContent = `${mm}:${ss} / 18:24`;
+        }
+
+        function seekBar(e) {
+            const bar = e.currentTarget;
+            const rect = bar.getBoundingClientRect();
+            const pct = ((e.clientX - rect.left) / rect.width) * 100;
+            if (pct <= previewMaxPercent) {
+                progress = pct;
+                updateProgressUI();
+            } else {
+                showLockedScreen();
+            }
+        }
+
+        function showLockedScreen() {
+            document.getElementById('playerControls').style.display = 'none';
+            document.getElementById('lockedMsg').style.display = 'flex';
+        }
+    </script>
+</body>
+
+</html>
